@@ -35,18 +35,6 @@ article h2 {
     box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.ingredients {
-    float: left;
-    margin-left: 32px;
-}
-
-.ingredients>ul {
-    margin-left: 32px;
-}
-
-.ingredients>ul>li {
-    margin-top: 16px;
-}
 
 .description {
     padding: 32px;
@@ -108,12 +96,12 @@ article h2 {
     margin: 0 4px;
 }
 
-.recent-recipes {
+.recent-ads {
     width: 850px;
     margin: auto;
 }
 
-.recent-recipes::after {
+.recent-ads::after {
     display: table;
     clear: both;
     content: "";
@@ -159,3 +147,4 @@ article h2 {
 .card, .card:visited {
     color: black;
 }
+

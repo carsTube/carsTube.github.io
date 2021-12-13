@@ -3,7 +3,9 @@ import { html } from '../lib.js'
 
 const catalogTemplate = (ads) => html`
 <section id="catalog">
+
     ${ads.map(adCard)}
+
 </section>`
 
 
