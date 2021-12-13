@@ -1,5 +1,6 @@
 import { createAd } from '../data/data.js';
 import { html } from '../lib.js'
+import { getUserData } from '../util.js';
 
 const createTemplate = (onSubmit) => html`
 <section id="create">
@@ -19,6 +20,11 @@ const createTemplate = (onSubmit) => html`
 `
 
 export async function createPage(ctx) {
+    const userData = getUserData();
+    if (userData == null) {
+        ctx.page.redirect('/login');
+    }
+    
     ctx.render(createTemplate(onSubmit));
 
     async function onSubmit(event) {
