@@ -9,7 +9,7 @@ const pageSize = 4;
 
 const endPoints = {
     createAd: '/classes/Ad',
-    ads: (page, pageSize) => `/classes/Ad?skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1`,
+    ads: (page, pageSize) => `/classes/Ad?skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1&order=-createdAt`,
     adsSearch: (page, query, pageSize) => `/classes/Ad?where=${createQuery(query)}&skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1`,
     adById: '/classes/Ad/',
 }
