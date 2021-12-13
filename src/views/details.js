@@ -1,9 +1,9 @@
-import { getAdById } from '../data/data.js'
+import { deleteAd, getAdById } from '../data/data.js'
 import { html } from '../lib.js'
 import { getUserData } from '../util.js';
 
 
-const detailsTemplate = (ad, isOwner) => html`
+const detailsTemplate = (ad, isOwner, onDelete) => html`
 <section id="details">
     <article>
         <h2>${ad.name}</h2>
@@ -24,7 +24,7 @@ const detailsTemplate = (ad, isOwner) => html`
         ${isOwner ? html `
         <div class="controls">
             <a class="actionLink" href="/edit/${ad.objectId}">&#x270e; Edit</a>
-            <a class="actionLink" href="javascript:void(0)">&#x2716; Delete</a>
+            <a class="actionLink" href="javascript:void(0)" @click=${onDelete}>&#x2716; Delete</a>
         </div>` : null}
         
     </article>      
@@ -36,5 +36,13 @@ export async function detailsPage(ctx) {
     const userData = getUserData();
     const isOwner = userData && userData.id == ad.owner.objectId 
 
-    ctx.render(detailsTemplate(ad, isOwner));
+    ctx.render(detailsTemplate(ad, isOwner, onDelete));
+
+    async function onDelete() {
+        const choice = confirm(`Are you sure you want to delete ${ad.name}`)
+        if (choice) {
+            await deleteAd(ctx.params.id);
+            ctx.page.redirect('/catalog');
+        }
+    }
 }
