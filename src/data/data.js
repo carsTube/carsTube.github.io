@@ -7,7 +7,7 @@ export const logout = api.logout;
 
 
 const endPoints = {
-    ads: '/classes/Ad',
+    ads: '/classes/Ad?order=-createdAt',
     adById: '/classes/Ad/',
 }
 
@@ -37,12 +37,12 @@ export async function getAdById(id) {
 
 
 export async function createAd(ad) {
-   addOwner(ad);
+    addOwner(ad);
     return api.post(endPoints.ads, ad);
 }
 
 
-export async function updateAd(id, ad){
+export async function updateAd(id, ad) {
     api.put(endPoints.adById + id, ad);
 }
 
