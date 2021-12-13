@@ -18,7 +18,7 @@ const detailsTemplate = (ad, isOwner) => html`
         </div>
         ${ad.description ? html `
         <div class="description">
-            Description: ${ad.description}
+            More information: ${ad.description}
         </div>` : 
         html `<p>The owner did not provide description for this ad.</p>`}
         ${isOwner ? html `

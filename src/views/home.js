@@ -4,7 +4,7 @@ import { html } from '../lib.js'
 const homeTemplate = () => html`
 <section id="home">
     <div class="hero">
-        <h2>Find the best car for you</h2>
+        <h2>Find the best car for you <a href="/catalog">&#x1F50E</a></h2>
     </div>
     <div class="background">
         <img src="/assets/background.jpg" class="backgroundImg">

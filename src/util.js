@@ -18,7 +18,7 @@ export function updateUserNav() {
     const guest = document.getElementById('guest');
     const userData = getUserData();
 
-    if(userData) {
+    if (userData) {
         user.style.display = 'inline-block';
         guest.style.display = 'none';
     } else {
@@ -26,4 +26,17 @@ export function updateUserNav() {
         guest.style.display = 'inline-block';
     }
 
+}
+
+
+export function parseQuery(queryString) {
+    if (queryString == '') {
+        return {}
+    } else {
+        return queryString.split('&').reduce((a, c) => {
+            const [key, value] = c.split('=');
+            a[key] = value;
+            return a;
+        }, {});
+    }
 }
