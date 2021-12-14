@@ -1,4 +1,4 @@
-import { login } from '../data/data.js';
+import { login } from '../data/user.js';
 import { html } from '../lib.js'
 
 

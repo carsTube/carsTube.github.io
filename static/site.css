@@ -87,7 +87,7 @@ a.active {
 
 .hero {
     display: block;
-    width: 850px;
+    width: 100%;
     margin: 32px auto 32px auto;
     background-color: #cccccc;
     box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
@@ -97,7 +97,7 @@ a.active {
 
 .section-title {
     display: block;
-    width: 850px;
+    width: 100%;
     margin: 32px auto 32px auto;
     background-color: #cccccc;
     box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);

@@ -33,16 +33,41 @@ article h2 {
 .thumb>img {
     max-width: 200px;
     box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
+  
+}
+
+.information {
+    float: left;
+    margin-left: 32px;
+}
+
+.information>ul {
+    margin-left: 32px;
+}
+
+.information>ul>li {
+    margin-top: 16px;
 }
 
 
-.description {
+.description{
     padding: 32px;
 }
 
-.description>p {
+.description>li {
     margin: 16px 0 16px 32px;
 }
+
+
+.info {
+    text-align: center;
+}
+
+
+
+
+
+
 
 .preview {
     vertical-align: middle;
@@ -147,4 +172,5 @@ article h2 {
 .card, .card:visited {
     color: black;
 }
+
 
