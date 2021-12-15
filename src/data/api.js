@@ -5,7 +5,6 @@ const host = 'https://parseapi.back4app.com'
 async function request(url, options) {
     try {
         const response = await fetch(host + url, options);
-        console.log(url);
         if (response.ok == false) {
             const error = await response.json();
             throw {

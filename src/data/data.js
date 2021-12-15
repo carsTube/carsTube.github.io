@@ -11,6 +11,7 @@ export const endPoints = {
     adsSearch: (page, query, pageSize) => `/classes/Ad?where=${createQuery(query)}&skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1`,
     adById: '/classes/Ad/',
     likeAd: '/classes/Like',
+    likeById: '/classes/Like/',
     likesForAd: (adId) => `/classes/Like?where=${createPointerQuery('ad', 'Ad', adId)}`,
     hasLikedAd: (query) => `/classes/Like?${query}`,
 }
