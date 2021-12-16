@@ -25,8 +25,6 @@ page('/details/:id', detailsPage);
 page('/edit/:id', editPage);
 
 
-
-
 page.start();
 updateUserNav();
 
@@ -44,3 +42,5 @@ function onLogout() {
     updateUserNav();
     page.redirect('/');
 }
+
+

@@ -1,5 +1,6 @@
 import { getAds } from '../data/data.js';
 import { html, until } from '../lib.js'
+import { spinner } from '../middlewares.js';
 import { parseQuery } from '../util.js';
 
 const catalogTemplate = (adsPromise, onSearch, pager, search = '') => html`
@@ -11,10 +12,10 @@ const catalogTemplate = (adsPromise, onSearch, pager, search = '') => html`
         </form>
     </div>
 
-    ${until(adsPromise, html`Loading...`)}
+    ${until(adsPromise, spinner())}
 
     <footer class="section-title">
-        ${until(pager(), html`Loading...`)}
+        ${until(pager(), spinner())}
     </footer>
 
 
