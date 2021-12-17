@@ -38,22 +38,10 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #6c8b47;
+    background-color: black;
     color: white;
     cursor: pointer;
 }
 
-input.error, textarea.error {
-    background-color: #ffc5c5;
-    border: 1px solid red;
-}
-
-p.error {
-    color: red;
-}
-
-h3 {
-  text-align: center;  
-}
 
 

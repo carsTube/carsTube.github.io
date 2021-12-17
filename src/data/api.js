@@ -1,3 +1,4 @@
+import { createErrorModal } from "../middlewares.js";
 import { clearUserData, getUserData, setUserData } from "../util.js";
 
 const host = 'https://parseapi.back4app.com'
@@ -16,7 +17,7 @@ async function request(url, options) {
         return response.json();
 
     } catch (err) {
-        alert(err.message);
+        createErrorModal(err.message);
         throw err;
     }
 

@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5); 
 }
 
 #modal {
@@ -16,6 +16,7 @@
     padding: 16px 32px;
     text-align: center;
     box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
+    
 }
 
 #modal p {
@@ -24,14 +25,14 @@
 
 #modal button {
     border: none;
-    margin: auto;
+    margin: 16px;
     background-color: darkgrey;
     padding: 8px 16px;
     color: black;
 }
 
 #modal button:hover {
-    background-color: #6c8b47;
+    background-color: black;
     color: white;
     cursor: pointer;
 }

@@ -1,5 +1,6 @@
 import { register } from '../data/user.js';
 import { html } from '../lib.js'
+import { createErrorModal } from '../middlewares.js';
 
 
 const registerTemplate = (onSubmit) => html`
@@ -31,11 +32,11 @@ export async function registerPage(ctx) {
         const repass = formData.get('rePass').trim();
 
         if (username == '' || email == '' || password == '' || repass == '') {
-            return alert('All fields are required !');
+            return createErrorModal('All fields are required!')
         }
 
         if (password != repass) {
-            return alert('Passwords don\'t match !')
+            return createErrorModal('Passwords don\'t match !')
         }
 
         await register(username, email, password);

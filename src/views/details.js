@@ -3,7 +3,7 @@ import { html, until } from '../lib.js'
 import { getUserData } from '../util.js';
 import { getLikesCount, hasLikedAd } from './likes.js';
 import { onLike, onUnLike } from './likes.js';
-import { spinner } from '../middlewares.js';
+import { spinner, createDeleteConfirm } from '../middlewares.js';
 
 
 
@@ -49,7 +49,7 @@ const adCard = (ad, isOwner, onDelete, likesCount, onLike, hasLiked, OnUnLike, i
         More information: ${ad.description}
         </div>` : 
         html `<p>The owner did not provide description for this ad.</p>`}
-        <div class="controls">Likes: ${likesCount} times
+        <div class="controls">Liked: ${likesCount} times
         ${buttonsTemplate(ad, isOwner, onDelete, hasLiked, isLogged, onLike, OnUnLike)}
         </div>
     </article>      
@@ -76,10 +76,17 @@ async function loadAd(ctx) {
     
 
     async function onDelete() {
-        const choice = confirm(`Are you sure you want to delete ${ad.name}`)
-        if (choice) {
+        createDeleteConfirm(`Are you sure you want to delete ${ad.name}`, onOk, onCancel);
+
+        async function onOk() {
             await deleteAd(ctx.params.id);
             ctx.page.redirect('/catalog');
         }
-    }
+
+        function onCancel (event) {
+            event.target.parentElement.parentElement.remove();
+            return;
+        }
+
+    }  
 }

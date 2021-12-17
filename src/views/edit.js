@@ -1,5 +1,6 @@
 import { getAdById, updateAd } from '../data/data.js';
 import { html } from '../lib.js'
+import { createErrorModal } from '../middlewares.js';
 
 const editTemplate = (ad, onSubmit) => html`
 <section id="edit">
@@ -34,17 +35,17 @@ export async function editPage(ctx) {
         const description = formData.get('description').trim();
 
         if (name == '' || price == '' || year == '' || img == '') {
-            return alert('Please fill all fields. Only description is optional !');
+            return createErrorModal('Please fill all fields. Only description is optional !');
         }
 
         if (isNaN(Number(price)) || Number(price) < 0 || isNaN(Number(year)) || Number(year) < 0) {
-            return alert('Price and year must be positive numbers !');
+            return createErrorModal('Price and year must be positive numbers !');
         }
 
         year = Number(year)
         price = Number(price)
 
-        await updateAd(ctx.params.id, { name, img, price, year, description });
+        updateAd(ctx.params.id, { name, img, price, year, description });
         ctx.page.redirect(`/details/${ctx.params.id}`);
     }
 }

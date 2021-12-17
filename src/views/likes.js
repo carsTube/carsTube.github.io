@@ -27,6 +27,7 @@ export async function getLikesCount(adId) {
     return result.results.length;
 }
 
+
 export async function hasLikedAd(ownerId, adId) {
     const query = `where={ \"ad\":{ \"__type\": \"Pointer\", \"className\": \"Ad\", \"objectId\": \"${adId}\" },\"owner\":{ \"__type\": \"Pointer\", \"className\": \"_User\", \"objectId\": \"${ownerId}\" } }`
     const result = await getLikeFromUser(query);

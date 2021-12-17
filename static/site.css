@@ -44,6 +44,7 @@ h1 a:visited {
 main {
     background-color: #666666;
     padding: 32px;
+    z-index: -1;
 }
 
 nav {
@@ -71,7 +72,7 @@ nav a:visited {
 }
 
 nav a:hover {
-    background-color: #6c8b47;
+    background-color: black;
     color: white;
 }
 
@@ -105,11 +106,11 @@ a.active {
 }
 
 a {
-    color: #40522a;
+    color: black;
 }
 
 a:visited {
-    color: #40522a;
+    color: black;
 }
 
 .pager {
@@ -130,7 +131,7 @@ a:visited {
 }
 
 .actionLink:hover {
-    background-color: #6c8b47;
+    background-color: black;
     color: white;
 }
 
