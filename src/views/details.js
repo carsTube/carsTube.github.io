@@ -6,30 +6,11 @@ import { onLike, onUnLike } from './likes.js';
 import { spinner, createDeleteConfirm } from '../middlewares.js';
 
 
-
-
 const detailsTemplate = (adPromise) => html`
 <section id="details">
     ${until(adPromise, spinner())}
 </section>
 `
-
-const buttonsTemplate = (ad, isOwner, onDelete, hasLiked, isLogged, onLike, OnUnLike) => {
-    if (isOwner == true) {
-        return html`
-        <a class="actionLink" href="javascript:void(0)" @click=${onDelete}>&#x2716; Delete</a>
-        <a class="actionLink" href="/edit/${ad.objectId}">&#x270e; Edit</a>`
-    } else {
-        if (isLogged && hasLiked.length == 0) {
-            return html`
-            <a class="actionLink" href="javascript:void(0)" @click=${onLike}>&#x1F44D Like</a>`
-        } else if (isLogged && hasLiked.length == 1) {
-            return html`
-            <a class="actionLink" href="javascript:void(0)" @click=${OnUnLike}>&#128078 Unlike</a>
-            `
-        }
-    }
-}
 
 const adCard = (ad, isOwner, onDelete, likesCount, onLike, hasLiked, OnUnLike, isLogged) => html`
 <article>
@@ -48,12 +29,30 @@ const adCard = (ad, isOwner, onDelete, likesCount, onLike, hasLiked, OnUnLike, i
         <div class="description">
         More information: ${ad.description}
         </div>` : 
+        isOwner ? html`<p>Click edit to add more information.</p>` :
         html `<p>The owner did not provide description for this ad.</p>`}
         <div class="controls">Liked: ${likesCount} times
         ${buttonsTemplate(ad, isOwner, onDelete, hasLiked, isLogged, onLike, OnUnLike)}
         </div>
     </article>      
 `
+
+const buttonsTemplate = (ad, isOwner, onDelete, hasLiked, isLogged, onLike, OnUnLike) => {
+    if (isOwner == true) {
+        return html`
+        <a class="actionLink" href="javascript:void(0)" @click=${onDelete}>Delete &#x2716;</a>
+        <a class="actionLink" href="/edit/${ad.objectId}">Edit &#x270e;</a>`
+    } else {
+        if (isLogged && hasLiked.length == 0) {
+            return html`
+            <a class="actionLink" href="javascript:void(0)" @click=${onLike}>Like &#x2605;</a>`
+        } else if (isLogged && hasLiked.length == 1) {
+            return html`
+            <a class="actionLink" href="javascript:void(0)" @click=${OnUnLike}>Unlike &#x2606;</a>
+            `
+        }
+    }
+}
 
 
 export async function detailsPage(ctx) {
@@ -76,7 +75,7 @@ async function loadAd(ctx) {
     
 
     async function onDelete() {
-        createDeleteConfirm(`Are you sure you want to delete ${ad.name}`, onOk, onCancel);
+        createDeleteConfirm(`Are you sure you want to delete ${ad.name} ?`, onOk, onCancel);
 
         async function onOk() {
             await deleteAd(ctx.params.id);

@@ -65,6 +65,7 @@ nav a {
     margin: 0 8px;
     text-decoration: none;
     color: black;
+    border-radius: 16px;
 }
 
 nav a:visited {
@@ -158,4 +159,8 @@ a:visited {
     width: 100%;
     margin: auto;
     display: block;
+}
+
+h2 {
+    text-align: center;
 }

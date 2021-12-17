@@ -7,7 +7,7 @@ const catalogTemplate = (adsPromise, onSearch, pager, search = '') => html`
 <section id="catalog">
     <div class="section-title">
         <form id="searchForm" @submit=${onSearch}>
-            <input type="text" name="search" .value=${search} placeholder="&#x1F50D Enter ad's name">
+            <input type="text" name="search" .value=${search} placeholder="&#x1F50D Enter ad's name..">
             <input type="submit" value="Search">
         </form>
     </div>
@@ -22,9 +22,9 @@ const catalogTemplate = (adsPromise, onSearch, pager, search = '') => html`
 </section>`
 
 
-const adCard = (ad) => html`
+export const adCard = (ad) => html`
 <a class="card" href="/details/${ad.objectId}">
-    <article class="preview">
+    <article class="preview" style="display: inline-block">
         <div class="title">
             <h2>${ad.name}</h2>
             <h2>${ad.price} €</h2>
@@ -40,10 +40,10 @@ function pagerSetup(page, adsPromise, search) {
 
         return html`
             Page ${page} of ${pages}
-            ${page > 1 ? html`<a class="pager" href=${'/catalog/' + createQuery(Number(page) - 1, search)}>&lt;
-                Prev</a>` : ''}
-            ${page < pages ? html`<a class="pager" href=${'/catalog/' + createQuery(Number(page) + 1, search)}>Next
-                &gt;</a>` : ''}`;
+            ${page > 1 ? html`<a class="pager" href=${'/catalog/' + createQuery(Number(page) - 1, search)}>
+                Previous page</a>&#x21e6;` : ''}
+            ${page < pages ? html`<a class="pager" href=${'/catalog/' + createQuery(Number(page) + 1, search)}>Next page
+           </a>&#x21e8;` : ''}`;
     };
 }
 

@@ -11,6 +11,7 @@ const createTemplate = (onSubmit) => html`
             <label>Name: <input type="text" name="name" placeholder="Ad name"></label>
             <label>Price: <input type="text" name="price" placeholder="Price"></label>
             <label>Year: <input type="text" name="year" placeholder="Year"></label>
+           
             <label>Image: <input type="text" name="img" placeholder="Image URL"></label>
             <label class="ml">Description: <textarea name="description"
                     placeholder="Describe the car"></textarea></label>
@@ -25,7 +26,7 @@ export async function createPage(ctx) {
     if (userData == null) {
         ctx.page.redirect('/login');
     }
-    
+
     ctx.render(createTemplate(onSubmit));
 
     async function onSubmit(event) {
@@ -39,18 +40,18 @@ export async function createPage(ctx) {
         let year = formData.get('year').trim();
         const description = formData.get('description').trim();
 
-        if (name == '' || price == '' || year == '' || img == ''){
-            return createErrorModal('Please fill all fields. Only description is optional !');
+        if (name == '' || price == '' || year == '' || img == '') {
+            return createErrorModal('Please fill all fields. Only description is optional.');
         }
 
         if (isNaN(Number(price)) || Number(price) < 0 || isNaN(Number(year)) || Number(year) < 0) {
-            return createErrorModal('Price and year must be positive numbers !');
+            return createErrorModal('Price and year must be positive numbers.');
         }
 
-        year= Number(year)
+        year = Number(year)
         price = Number(price)
 
-        const result = await createAd({name, img, price, year, description});
+        const result = await createAd({ name, img, price, year, description });
         ctx.page.redirect(`/details/${result.objectId}`);
 
     }

@@ -1,17 +1,16 @@
 import { html } from './lib.js'
 
 export function spinner() {
-    return html`<div class="ring">Loading<span></span></div>`;
+    return html`<div class="ring">Loading<span class="spinner"></span></div>`;
 }
 
 
-
-export function createDeleteConfirm(message, onOk, onCancel){
+export function createDeleteConfirm(message, onOk, onCancel) {
     const divOverlay = document.createElement('div');
     divOverlay.id = 'overlay';
 
     const divModal = document.createElement('div');
-    divModal.id='modal';
+    divModal.id = 'modal';
     divOverlay.appendChild(divModal);
 
     const title = document.createElement('p');
@@ -37,7 +36,7 @@ export function createErrorModal(message) {
     divOverlay.id = 'overlay';
 
     const divModal = document.createElement('div');
-    divModal.id='modal';
+    divModal.id = 'modal';
     divOverlay.appendChild(divModal);
 
     const title = document.createElement('p');
@@ -50,6 +49,6 @@ export function createErrorModal(message) {
         event.target.parentElement.parentElement.remove();
     });
     divModal.appendChild(buttonOk);
-    
+
     document.querySelector('main').appendChild(divOverlay);
 }

@@ -35,11 +35,11 @@ export async function editPage(ctx) {
         const description = formData.get('description').trim();
 
         if (name == '' || price == '' || year == '' || img == '') {
-            return createErrorModal('Please fill all fields. Only description is optional !');
+            return createErrorModal('Please fill all fields. Only description is optional.');
         }
 
         if (isNaN(Number(price)) || Number(price) < 0 || isNaN(Number(year)) || Number(year) < 0) {
-            return createErrorModal('Price and year must be positive numbers !');
+            return createErrorModal('Price and year must be positive numbers.');
         }
 
         year = Number(year)

@@ -11,7 +11,7 @@ const loginTemplate = (onSubmit) => html`
             <label>Password: <input type="password" name="password"></label>
             <input type="submit" value="Login">
         </form>
-        <h3>Don't have an account ? Click <a href="/register">here</a></h3>
+        <h3 class="redirect">Don't have an account ? Click <a href="/register">here</a></h3>
     </article>
 </section>`;
 

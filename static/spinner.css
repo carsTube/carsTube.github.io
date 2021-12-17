@@ -39,7 +39,7 @@ body
   border-radius:50%;
   animation:animateC 2s linear infinite;
 }
-span
+.spinner
 {
   display:block;
   position:absolute;
@@ -51,7 +51,7 @@ span
   transform-origin:left;
   animation:animate 2s linear infinite;
 }
-span:before
+.spinner:before
 {
   content:'';
   position:absolute;

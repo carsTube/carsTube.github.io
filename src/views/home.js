@@ -1,7 +1,8 @@
 import { getAds } from '../data/data.js';
 import { html } from '../lib.js'
+import { adCard } from './catalog.js';
 
-const homeTemplate = () => html`
+const homeTemplate = (recentAds) => html`
 <section id="home">
     <div class="hero">
         <h2>Find the best car for you <a href="/catalog">&#x1F50E</a></h2>
@@ -10,12 +11,16 @@ const homeTemplate = () => html`
         <img src="/assets/background1.jpg" class="backgroundImg">
     </div>
     <footer class="section-title">
-        <p>Find your car at <a href="/catalog">Catalog</a></p>
+        ${recentAds.map(adCard)}
     </footer>
 </section>`
 
 
 
 export async function homePage(ctx) {
-    ctx.render(homeTemplate());
+    const recentAds = await getAds(0, 0, true);
+    ctx.render(homeTemplate(recentAds.results));
+
+    
+    
 }

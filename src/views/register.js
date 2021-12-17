@@ -14,7 +14,7 @@ const registerTemplate = (onSubmit) => html`
             <label>Repeat: <input type="password" name="rePass"></label>
             <input type="submit" value="Register">
         </form>
-        <h3>Already have an account? Click <a href="/login">here</a></h3>
+        <h3 class="redirect">Already have an account? Click <a href="/login">here</a></h3>
     </article>
 </section>`;
 
@@ -32,11 +32,11 @@ export async function registerPage(ctx) {
         const repass = formData.get('rePass').trim();
 
         if (username == '' || email == '' || password == '' || repass == '') {
-            return createErrorModal('All fields are required!')
+            return createErrorModal('All fields are required.')
         }
 
         if (password != repass) {
-            return createErrorModal('Passwords don\'t match !')
+            return createErrorModal('Passwords don\'t match.')
         }
 
         await register(username, email, password);
