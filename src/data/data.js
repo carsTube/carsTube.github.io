@@ -2,11 +2,10 @@ import { getUserData } from '../util.js';
 import * as api from './api.js'
 
 
-
 const pageSize = 6;
 
 export const endPoints = {
-    createAd: '/classes/Ad',
+    user: '/users/',
     ads: (page, pageSize) => `/classes/Ad?skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1&order=-createdAt`,
     recentAds: '/classes/Ad?limit=2&order=-createdAt',
     adsSearch: (page, query, pageSize) => `/classes/Ad?where=${createQuery(query)}&skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1`,
@@ -15,7 +14,7 @@ export const endPoints = {
     likeById: '/classes/Like/',
     likesForAd: (adId) => `/classes/Like?where=${createPointerQuery('ad', 'Ad', adId)}`,
     hasLikedAd: (query) => `/classes/Like?${query}`,
-    user: '/users/'
+   
 }
 
 export function createPointerQuery(propName, className, objectId) {
@@ -39,7 +38,6 @@ export function addOwner(record) {
     const { id } = getUserData();
     record.owner = createPointer('_User', id);
 }
-
 
 
 

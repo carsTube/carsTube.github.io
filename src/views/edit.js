@@ -60,11 +60,11 @@ export async function editPage(ctx) {
         if (isNaN(Number(price)) || Number(price) < 0 || isNaN(Number(year)) || Number(year) < 0) {
             return createErrorModal('Price and year must be positive numbers.');
         }
-
+        
         year = Number(year)
         price = Number(price)
 
-        updateAd(ctx.params.id, { name, img, price, year, description, engine, ownerEmail, ownerPhone });
+        updateAd(ctx.params.id, { name, img, price, year, description, engine, ownerEmail, ownerPhone});
         ctx.page.redirect(`/details/${ctx.params.id}`);
     }
 }
