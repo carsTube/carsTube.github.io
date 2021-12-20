@@ -93,7 +93,7 @@ async function loadAd(ctx) {
         createDeleteConfirm(`Are you sure you want to delete ${ad.name} ?`, onOk, onCancel);
 
         async function onOk() {
-            await deleteAd(ctx.params.id);
+            deleteAd(ctx.params.id);
             ctx.page.redirect('/catalog');
         }
 

@@ -17,8 +17,6 @@ const catalogTemplate = (adsPromise, onSearch, pager, search = '') => html`
     <footer class="section-title">
         ${until(pager(), spinner())}
     </footer>
-
-
 </section>`
 
 

@@ -3,17 +3,17 @@ import { page } from '../lib.js'
 import { getUserData } from '../util.js';
 
 export async function onLike() {
-    const adId = window.location.href.split('/')[4]
+    const adId = currentAdId();
     await likeAd(adId);
     page.redirect(`/details/${adId}`)
 }
 
 
 export async function onUnLike() {
-    const adId = window.location.href.split('/')[4]
+    const adId = currentAdId();
     const { id } = getUserData();
 
-    const query = `where={ \"ad\":{ \"__type\": \"Pointer\", \"className\": \"Ad\", \"objectId\": \"${adId}\" },\"owner\":{ \"__type\": \"Pointer\", \"className\": \"_User\", \"objectId\": \"${id}\" } }`
+    const query = craeateQueryWithDoublePointers(id, adId);
     const result = await getLikeFromUser(query);
     const likeId = result.results[0].objectId;
     
@@ -29,8 +29,16 @@ export async function getLikesCount(adId) {
 
 
 export async function hasLikedAd(ownerId, adId) {
-    const query = `where={ \"ad\":{ \"__type\": \"Pointer\", \"className\": \"Ad\", \"objectId\": \"${adId}\" },\"owner\":{ \"__type\": \"Pointer\", \"className\": \"_User\", \"objectId\": \"${ownerId}\" } }`
+    const query = craeateQueryWithDoublePointers(ownerId, adId);
     const result = await getLikeFromUser(query);
     return result.results;
 }
 
+
+function currentAdId() {
+    return window.location.href.split('/')[4];
+}
+
+function craeateQueryWithDoublePointers(ownerId, adId) {
+    return `where={ \"ad\":{ \"__type\": \"Pointer\", \"className\": \"Ad\", \"objectId\": \"${adId}\" },\"owner\":{ \"__type\": \"Pointer\", \"className\": \"_User\", \"objectId\": \"${ownerId}\" } }`
+}
