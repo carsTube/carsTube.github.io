@@ -71,7 +71,8 @@ export async function login(username, password) {
     const userData = {
         username: result.username,
         id: result.objectId,
-        token: result.sessionToken
+        token: result.sessionToken,
+        email: result.email
     };
 
     setUserData(userData);

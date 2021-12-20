@@ -15,6 +15,7 @@ export const endPoints = {
     likeById: '/classes/Like/',
     likesForAd: (adId) => `/classes/Like?where=${createPointerQuery('ad', 'Ad', adId)}`,
     hasLikedAd: (query) => `/classes/Like?${query}`,
+    user: '/users/'
 }
 
 export function createPointerQuery(propName, className, objectId) {

@@ -4,6 +4,8 @@ import { getUserData } from '../util.js';
 import { getLikesCount, hasLikedAd } from './likes.js';
 import { onLike, onUnLike } from './likes.js';
 import { spinner, createDeleteConfirm } from '../middlewares.js';
+import { getOnwerInfo } from '../data/user.js';
+
 
 
 const detailsTemplate = (adPromise) => html`
@@ -12,25 +14,36 @@ const detailsTemplate = (adPromise) => html`
 </section>
 `
 
-const adCard = (ad, isOwner, onDelete, likesCount, onLike, hasLiked, OnUnLike, isLogged) => html`
-<article>
+const adCard = (ad, isOwner, onDelete, likesCount, onLike, hasLiked, OnUnLike, isLogged, ownerInfo) => html`
+<article style="width: 890px">
         <h2>${ad.name}</h2>
         <div class="band">
             <div class="thumb"><img src=${ad.img}></div>
             <div class="information">
-                    <h3>Information</h3>
+                <div>
+                <h3>Information</h3>
                     <ul>
                         <li>Year: ${ad.year}</li>
                         <li>Price: ${ad.price} &#x20AC</li>
+                        <li>Engine: ${ad.engine.charAt(0).toUpperCase() + ad.engine.slice(1)}</li>
                     </ul>
+                </div>
+                <div>
+                    <h3>Contact information</h3>
+                    <ul>
+                        <li>Owner: ${ownerInfo.username}</li> 
+                        <li>Email: ${ad.ownerEmail}</li>
+                        <li>Phone: ${ad.ownerPhone}</li> 
+                    </ul></div>
+                </div>
             </div>
         </div>  
-        ${ad.description ? html `
+        ${ad.description  ? html `
         <div class="description">
-        More information: ${ad.description}
+        ${ad.description}
         </div>` : 
         isOwner ? html`<p>Click edit to add more information.</p>` :
-        html `<p>The owner did not provide description for this ad.</p>`}
+        html `<p>No additional information.</p>`}
         <div class="controls">Liked: ${likesCount} times
         ${buttonsTemplate(ad, isOwner, onDelete, hasLiked, isLogged, onLike, OnUnLike)}
         </div>
@@ -68,10 +81,12 @@ async function loadAd(ctx) {
         userData ? await hasLikedAd(userData.id, ctx.params.id) : null,
     ])
 
+    const ownerInfo = await getOnwerInfo(ad.owner.objectId);
     const isOwner = userData && userData.id == ad.owner.objectId
     const isLogged = userData != null;
 
-    return adCard(ad, isOwner, onDelete, likesCount, onLike, hasLiked, onUnLike, isLogged)
+
+    return adCard(ad, isOwner, onDelete, likesCount, onLike, hasLiked, onUnLike, isLogged, ownerInfo)
     
 
     async function onDelete() {

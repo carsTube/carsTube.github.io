@@ -17,7 +17,9 @@ article h2 {
 .band {
     background-color: white;
     padding: 32px;
+
 }
+
 
 .band::after {
     content: "";
@@ -41,11 +43,17 @@ article h2 {
     margin-left: 32px;
 }
 
-.information>ul {
+.information>div>ul {
     margin-left: 32px;
 }
 
-.information>ul>li {
+.information>div {
+    margin-left: 32px;
+    display: inline-block;
+}
+
+
+.information>div>ul>li {
     margin-top: 16px;
 }
 

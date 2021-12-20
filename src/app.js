@@ -8,8 +8,7 @@ import { registerPage } from "./views/register.js";
 import { detailsPage } from "./views/details.js";
 import { createPage } from "./views/create.js";
 import { editPage } from "./views/edit.js";
-import * as api from "./views/likes.js";
-window.api = api;
+
 
 const main = document.querySelector('main')
 document.getElementById('logoutBtn').addEventListener('click', onLogout);

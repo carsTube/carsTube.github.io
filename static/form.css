@@ -48,3 +48,29 @@ input[type="submit"]:hover {
 }
 
 
+
+.radio-group {
+    display: inline-block;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.radio-group>label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px 20px;
+}
+
+
+input[type=radio] {
+    position: absolute;
+    visibility: hidden;
+    display: none;
+}
+
+input[type=radio]:checked + label{
+    background: white;
+    border-radius: 16px;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');

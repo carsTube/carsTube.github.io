@@ -40,8 +40,8 @@ function pagerSetup(page, adsPromise, search) {
 
         return html`
             Page ${page} of ${pages}
-            ${page > 1 ? html`<a class="pager" href=${'/catalog/' + createQuery(Number(page) - 1, search)}>
-                Previous page</a>&#x21e6;` : ''}
+            ${page > 1 ? html`&#x21e6;<a class="pager" href=${'/catalog/' + createQuery(Number(page) - 1, search)}>
+                Previous page</a>` : ''}
             ${page < pages ? html`<a class="pager" href=${'/catalog/' + createQuery(Number(page) + 1, search)}>Next page
            </a>&#x21e8;` : ''}`;
     };
