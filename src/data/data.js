@@ -5,6 +5,7 @@ import * as api from './api.js'
 const pageSize = 6;
 
 export const endPoints = {
+    createAd: '/classes/Ad',
     user: '/users/',
     ads: (page, pageSize) => `/classes/Ad?skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1&order=-createdAt`,
     recentAds: '/classes/Ad?limit=2&order=-createdAt',
@@ -14,6 +15,10 @@ export const endPoints = {
     likeById: '/classes/Like/',
     likesForAd: (adId) => `/classes/Like?where=${createPointerQuery('ad', 'Ad', adId)}`,
     hasLikedAd: (query) => `/classes/Like?${query}`,
+    rateAd: '/classes/Rating',
+    rateById: '/classes/Rating/',
+    ratingForAd: (adId) => `/classes/Rating?where=${createPointerQuery('ad', 'Ad', adId)}`,
+    hasRatedAd: (query) => `/classes/Rating?${query}`,
    
 }
 

@@ -23,7 +23,7 @@ const createTemplate = (onSubmit, email) => html`
             <label>Email: <input type="text" name="ownerEmail" .value=${email}> </label>
             <label class="ml">Description: <textarea name="description"
                     placeholder="Describe the car"></textarea></label>
-            <input type="submit" value="Create Ad">
+            <input type="submit" value="Publish Ad"}>
         </form>
     </article>
 </section>

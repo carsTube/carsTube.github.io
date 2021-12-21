@@ -62,9 +62,6 @@ article h2 {
     padding: 32px;
 }
 
-.description>li {
-    margin: 16px 0 16px 32px;
-}
 
 
 .info {
@@ -175,5 +172,4 @@ article h2 {
 .card, .card:visited {
     color: black;
 }
-
 

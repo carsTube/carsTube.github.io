@@ -36,3 +36,9 @@
     color: white;
     cursor: pointer;
 }
+
+.modalChoices .actionLink {
+    display: block;
+    width: 500px;
+    
+}

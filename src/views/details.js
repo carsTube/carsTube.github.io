@@ -3,9 +3,9 @@ import { html, until } from '../lib.js'
 import { getUserData } from '../util.js';
 import { getLikesCount, hasLikedAd } from './likes.js';
 import { onLike, onUnLike } from './likes.js';
-import { spinner, createDeleteConfirm } from '../middlewares.js';
+import { spinner, createDeleteConfirm, createRateModal} from '../middlewares.js';
 import { getOnwerInfo } from '../data/user.js';
-
+import { getAdRating, onRate } from './ratings.js';
 
 
 const detailsTemplate = (adPromise) => html`
@@ -14,7 +14,7 @@ const detailsTemplate = (adPromise) => html`
 </section>
 `
 
-const adCard = (ad, isOwner, onDelete, likesCount, onLike, hasLiked, OnUnLike, isLogged, ownerInfo) => html`
+const adCard = (ad, isOwner, onDelete, likesCount, onLike, hasLiked, OnUnLike, isLogged, ownerInfo, adRating, onRate, createRateModal) => html`
 <article style="width: 890px">
         <h2>${ad.name}</h2>
         <div class="band">
@@ -38,14 +38,13 @@ const adCard = (ad, isOwner, onDelete, likesCount, onLike, hasLiked, OnUnLike, i
                 </div>
             </div>
         </div>  
-        ${ad.description  ? html `
         <div class="description">
+        ${adRating ?  createAdTitle(adRating) : null}
         ${ad.description}
-        </div>` : 
-        isOwner ? html`<p>Click edit to add more information.</p>` :
-        html `<p>No additional information.</p>`}
+        </div>
         <div class="controls">Liked: ${likesCount} times
         ${buttonsTemplate(ad, isOwner, onDelete, hasLiked, isLogged, onLike, OnUnLike)}
+        ${rateTemplate(onRate, createRateModal, isLogged, isOwner)}
         </div>
     </article>      
 `
@@ -54,17 +53,38 @@ const buttonsTemplate = (ad, isOwner, onDelete, hasLiked, isLogged, onLike, OnUn
     if (isOwner == true) {
         return html`
         <a class="actionLink" href="javascript:void(0)" @click=${onDelete}>Delete &#x2716;</a>
-        <a class="actionLink" href="/edit/${ad.objectId}">Edit &#x270e;</a>`
+        <a class="actionLink" href="/edit/${ad.objectId}">Edit &#x270e;</a>`;
     } else {
         if (isLogged && hasLiked.length == 0) {
             return html`
-            <a class="actionLink" href="javascript:void(0)" @click=${onLike}>Like &#x2605;</a>`
+            <a class="actionLink" href="javascript:void(0)" @click=${(event) => {event.target.remove(); onLike()}}>Like</a>`;
         } else if (isLogged && hasLiked.length == 1) {
             return html`
-            <a class="actionLink" href="javascript:void(0)" @click=${OnUnLike}>Unlike &#x2606;</a>
-            `
+            <a class="actionLink" href="javascript:void(0)"  @click=${(event) => {event.target.remove(); OnUnLike()}}>Unlike</a>`;
         }
     }
+}
+
+
+const rateTemplate = (onRate, createRateModal, isLogged, isOwner) =>{
+    if (isLogged && isOwner == false) {
+        return html`
+        <a class="actionLink" href="javascript:void(0)" @click=${() => createRateModal('Rate this ad', onRate)}>Rate Ad</a>`;
+    }
+} 
+
+function createAdTitle(adRating) {
+    const stars = document.createElement('div');
+    stars.innerHTML = 'Rating: '
+    for(let i = 0; i < Math.floor(adRating); i ++) {
+        stars.innerHTML += '&#x2605';
+    }
+
+    if (!isNaN(adRating)  && adRating != Math.floor(adRating)) {
+        stars.innerHTML += '&#x2606';
+    }
+
+    return stars;
 }
 
 
@@ -75,8 +95,10 @@ export async function detailsPage(ctx) {
 
 async function loadAd(ctx) {
     const userData = getUserData();
-    const [ad, likesCount, hasLiked] = await Promise.all([
+
+    const [ad, adRating, likesCount, hasLiked] = await Promise.all([
         await getAdById(ctx.params.id),
+        await getAdRating(ctx.params.id),
         await getLikesCount(ctx.params.id),
         userData ? await hasLikedAd(userData.id, ctx.params.id) : null,
     ])
@@ -86,7 +108,7 @@ async function loadAd(ctx) {
     const isLogged = userData != null;
 
 
-    return adCard(ad, isOwner, onDelete, likesCount, onLike, hasLiked, onUnLike, isLogged, ownerInfo)
+    return adCard(ad, isOwner, onDelete, likesCount, onLike, hasLiked, onUnLike, isLogged, ownerInfo, adRating, onRate, createRateModal)
     
 
     async function onDelete() {

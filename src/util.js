@@ -40,3 +40,11 @@ export function parseQuery(queryString) {
         }, {});
     }
 }
+
+export function currentAdId() {
+    return window.location.href.split('/')[4];
+}
+
+export function craeateQueryWithDoublePointers(ownerId, adId) {
+    return `where={ \"ad\":{ \"__type\": \"Pointer\", \"className\": \"Ad\", \"objectId\": \"${adId}\" },\"owner\":{ \"__type\": \"Pointer\", \"className\": \"_User\", \"objectId\": \"${ownerId}\" } }`
+}

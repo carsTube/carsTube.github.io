@@ -64,7 +64,7 @@ export async function editPage(ctx) {
         year = Number(year)
         price = Number(price)
 
-        updateAd(ctx.params.id, { name, img, price, year, description, engine, ownerEmail, ownerPhone});
+        await updateAd(ctx.params.id, { name, img, price, year, description, engine, ownerEmail, ownerPhone});
         ctx.page.redirect(`/details/${ctx.params.id}`);
     }
 }
