@@ -10,9 +10,8 @@ const homeTemplate = (recentAds) => html`
     <div class="background">
         <img src="/assets/background1.jpg" class="backgroundImg">
     </div>
-    <footer class="section-title">
         ${recentAds.map(adCard)}
-    </footer>
+    </div>
 </section>`
 
 

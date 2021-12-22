@@ -150,16 +150,8 @@ a:visited {
     display: inline-block;
 }
 
-.background {
-    display: flex;
-    justify-content: center
-}
 
-.backgroundImg {
-    width: 100%;
-    margin: auto;
-    display: block;
-}
+
 
 h2 {
     text-align: center;
@@ -175,4 +167,16 @@ h2 {
 .filters {
     display: none;
     margin-top: 16px;
+}
+
+
+.background {
+    display: flex;
+    justify-content: center
+}
+
+.backgroundImg {
+    width: 100%;
+    margin: auto;
+    display: block;
 }

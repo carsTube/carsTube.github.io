@@ -7,12 +7,12 @@ const catalogTemplate = (adsPromise, onSearch, pager, search = '', showFilters, 
 <section id="catalog">
     <div><a class="actionLink" href="javascript:void(0)" @click=${(event)=> showFilters(event)}>Select Filters</a></div>
     <div class="filters" @click=${(event)=> onFilter(event)}>
-        <button class="actionLink" value="price">Price Ascending</button>
-        <button class="actionLink" value="-price">Price Descending</button>
-        <button class="actionLink" value="year">Year Ascending</button>
-        <button class="actionLink" value="-year">Year Descending</button>
-        <button class="actionLink" value="name">Name Ascending</button>
-        <button class="actionLink" value="-name">Name Descending</button>
+        <button class="actionLink" value="price">Price &#x2191;</button>
+        <button class="actionLink" value="-price">Price &#x2193;</button>
+        <button class="actionLink" value="year">Year &#x2191;</button>
+        <button class="actionLink" value="-year">Year &#x2193;</button>
+        <button class="actionLink" value="name">Name &#x2191;</button>
+        <button class="actionLink" value="-name">Name &#x2193;</button>
     </div>
     <div class="section-title">
         <form id="searchForm" @submit=${onSearch}>
