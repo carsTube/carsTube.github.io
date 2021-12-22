@@ -14,7 +14,7 @@ const createTemplate = (onSubmit, email) => html`
             <label>Image: <input type="text" name="img" placeholder="Image URL"></label>
             <div class="radio-group">
                 <label>Engine: </label>
-                <input type="radio" id="option-one" name="engine" value="gasoline"><label for="option-one">Gasoline</label>
+                <input type="radio" id="option-one" name="engine" value="gas"><label for="option-one">Gas</label>
                 <input type="radio" id="option-two" name="engine" value="diesel"><label for="option-two">Diesel</label>
                 <input type="radio" id="option-three" name="engine" value="electrical"><label for="option-three">Electrical</label>
                 <input type="radio" id="option-four" name="engine" value="hybrid"><label for="option-four">Hybrid</label>

@@ -14,7 +14,7 @@ const editTemplate = (ad, onSubmit) => html`
             <div class="radio-group" selected = ${ad.engine}>
             <div class="radio-group">
                 <label>Engine: </label>
-                <input type="radio" id="option-one" name="engine" value="gasoline" ?checked=${ad.engine === 'gasoline'}><label for="option-one">Gasoline</label>
+                <input type="radio" id="option-one" name="engine" value="gas" ?checked=${ad.engine === 'gas'}><label for="option-one">Gas</label>
                 <input type="radio" id="option-two" name="engine" value="diesel" ?checked=${ad.engine === 'diesel'}><label for="option-two">Diesel</label>
                 <input type="radio" id="option-three" name="engine" value="electrical" ?checked=${ad.engine === 'electrical'}><label for="option-three">Electrical</label>
                 <input type="radio" id="option-four" name="engine" value="hybrid" ?checked=${ad.engine === 'hybrid'}><label for="option-four">Hybrid</label>
