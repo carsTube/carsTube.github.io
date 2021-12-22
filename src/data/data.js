@@ -9,6 +9,7 @@ export const endPoints = {
     user: '/users/',
     ads: (page, pageSize) => `/classes/Ad?skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1&order=-createdAt`,
     recentAds: '/classes/Ad?limit=2&order=-createdAt',
+    ownAds: (objectId) => `/classes/Ad?where=${createPointerQuery('owner', '_User', objectId)}&order=-createdAt`,
     adsSearch: (page, query, pageSize) => `/classes/Ad?where=${createQuery(query)}&skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1`,
     adById: '/classes/Ad/',
     likeAd: '/classes/Like',
@@ -46,9 +47,13 @@ export function addOwner(record) {
 
 
 
-export async function getAds(page, query, recent) {
+export async function getAds(page, query, recent, own) {
     if (recent == true) {
         return api.get(endPoints.recentAds);
+    }
+    if (own == true){
+        const {id} = getUserData();
+        return api.get(endPoints.ownAds(id));
     }
     const data = await (() => {
         if (query) {

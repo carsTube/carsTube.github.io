@@ -71,7 +71,7 @@ export async function catalogPage(ctx) {
 
 
 
-async function loadAds(adsPromise) {
+export async function loadAds(adsPromise) {
     const { results: ads } = await adsPromise;
     return ads.map(adCard);
 }

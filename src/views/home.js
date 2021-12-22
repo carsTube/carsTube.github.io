@@ -5,7 +5,7 @@ import { adCard } from './catalog.js';
 const homeTemplate = (recentAds) => html`
 <section id="home">
     <div class="hero">
-        <h2>Find the best car for you <a href="/catalog">&#x1F50E</a></h2>
+        <h2>Find the best car for you <a href="/catalog">&#128270;</a></h2>
     </div>
     <div class="background">
         <img src="/assets/background1.jpg" class="backgroundImg">

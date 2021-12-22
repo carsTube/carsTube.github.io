@@ -7,7 +7,6 @@ export async function rateAd(adId, rating) {
     }
     rate.ad = createPointer('Ad', adId);
     addOwner(rate);
-    console.log(rate);
     return api.post(endPoints.rateAd, rate);
 }
 

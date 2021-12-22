@@ -164,3 +164,9 @@ a:visited {
 h2 {
     text-align: center;
 }
+
+.hero>span{
+    display: block;
+    text-align: left;
+    font-size: larger;
+}

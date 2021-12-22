@@ -8,6 +8,7 @@ import { registerPage } from "./views/register.js";
 import { detailsPage } from "./views/details.js";
 import { createPage } from "./views/create.js";
 import { editPage } from "./views/edit.js";
+import { profilePage } from "./views/profile.js";
 
 
 const main = document.querySelector('main')
@@ -20,6 +21,7 @@ page('/catalog', catalogPage);
 page('/create', createPage);
 page('/login', loginPage);
 page('/register', registerPage);
+page('/profile', profilePage);
 page('/details/:id', detailsPage);
 page('/edit/:id', editPage);
 
