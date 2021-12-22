@@ -171,3 +171,8 @@ h2 {
     font-size: larger;
     padding-top: 8px;
 }
+
+.filters {
+    display: none;
+    margin-top: 16px;
+}

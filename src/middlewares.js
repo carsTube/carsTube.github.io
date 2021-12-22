@@ -107,6 +107,7 @@ export function createRateModal(message, onRate) {
         if (event.target.nodeName == 'BUTTON'){
             event.target.parentElement.parentElement.parentElement.remove();
             let rating = event.target.dataset.rating;
+            console.log(event.target.dataset);
             rating = Number(rating);
             onRate(rating);
         }

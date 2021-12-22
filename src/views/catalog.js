@@ -3,8 +3,17 @@ import { html, until } from '../lib.js'
 import { spinner } from '../middlewares.js';
 import { parseQuery } from '../util.js';
 
-const catalogTemplate = (adsPromise, onSearch, pager, search = '') => html`
+const catalogTemplate = (adsPromise, onSearch, pager, search = '', showFilters, onFilter) => html`
 <section id="catalog">
+    <div><a class="actionLink" href="javascript:void(0)" @click=${(event)=> showFilters(event)}>Select Filters</a></div>
+    <div class="filters" @click=${(event)=> onFilter(event)}>
+        <button class="actionLink" value="price">Price Ascending</button>
+        <button class="actionLink" value="-price">Price Descending</button>
+        <button class="actionLink" value="year">Year Ascending</button>
+        <button class="actionLink" value="-year">Year Descending</button>
+        <button class="actionLink" value="name">Name Ascending</button>
+        <button class="actionLink" value="-name">Name Descending</button>
+    </div>
     <div class="section-title">
         <form id="searchForm" @submit=${onSearch}>
             <input type="text" name="search" .value=${search} placeholder="&#x1F50D Enter ad's name..">
@@ -41,7 +50,7 @@ function pagerSetup(page, adsPromise, search) {
             ${page > 1 ? html`&#x21e6;<a class="pager" href=${'/catalog/' + createQuery(Number(page) - 1, search)}>
                 Previous page</a>` : ''}
             ${page < pages ? html`<a class="pager" href=${'/catalog/' + createQuery(Number(page) + 1, search)}>Next page
-           </a>&#x21e8;` : ''}`;
+                </a>&#x21e8;` : ''}`;
     };
 }
 
@@ -52,9 +61,9 @@ function createQuery(page, search) {
 
 export async function catalogPage(ctx) {
     const { page, search } = parseQuery(ctx.querystring);
-    const adsPromise = getAds(page || 1, search || '');
+    const adsPromise = getAds(page || 1, search || '', false, false, '-createdAt');
 
-    ctx.render(catalogTemplate(loadAds(adsPromise), onSearch, pagerSetup(page || 1, adsPromise, search), search));
+    ctx.render(catalogTemplate(loadAds(adsPromise), onSearch, pagerSetup(page || 1, adsPromise, search), search, showFilters, onFilter));
 
     function onSearch(event) {
         event.preventDefault();
@@ -67,6 +76,14 @@ export async function catalogPage(ctx) {
             ctx.page.redirect('/catalog');
         }
     }
+
+    async function onFilter(event) {
+        if (event.target.nodeName == 'BUTTON') {
+            const orderBy = event.target.value
+            const adsPromise = getAds(page || 1, search || '', false, false, orderBy);
+            ctx.render(catalogTemplate(loadAds(adsPromise), onSearch, pagerSetup(page || 1, adsPromise, search), search, showFilters, onFilter));
+        }
+    }
 }
 
 
@@ -75,3 +92,17 @@ export async function loadAds(adsPromise) {
     const { results: ads } = await adsPromise;
     return ads.map(adCard);
 }
+
+
+function showFilters(event) {
+    const filters = document.querySelector('.filters');
+
+    if (event.target.textContent == 'Select Filters') {
+        filters.style.display = 'block';
+        event.target.textContent = 'Hide Filters';
+    } else {
+        filters.style.display = 'none';
+        event.target.textContent = 'Select Filters';
+    }
+}
+
