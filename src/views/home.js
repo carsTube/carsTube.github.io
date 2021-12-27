@@ -17,7 +17,7 @@ const homeTemplate = (recentAds) => html`
 
 
 export async function homePage(ctx) {
-    const recentAds = await getAds(0, 0, true);
+    const recentAds = await getAds(0, 0, false, '-createdAt');
     ctx.render(homeTemplate(recentAds.results));
 
     

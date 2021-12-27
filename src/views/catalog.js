@@ -61,7 +61,7 @@ function createQuery(page, search) {
 
 export async function catalogPage(ctx) {
     const { page, search } = parseQuery(ctx.querystring);
-    const adsPromise = getAds(page || 1, search || '', false, false, '-createdAt');
+    const adsPromise = getAds(page || 1, search || '', false, '-createdAt');
 
     ctx.render(catalogTemplate(loadAds(adsPromise), onSearch, pagerSetup(page || 1, adsPromise, search), search, showFilters, onFilter));
 
@@ -80,7 +80,7 @@ export async function catalogPage(ctx) {
     async function onFilter(event) {
         if (event.target.nodeName == 'BUTTON') {
             const orderBy = event.target.value
-            const adsPromise = getAds(page || 1, search || '', false, false, orderBy);
+            const adsPromise = getAds(page || 1, search || '', false, orderBy);
             ctx.render(catalogTemplate(loadAds(adsPromise), onSearch, pagerSetup(page || 1, adsPromise, search), search, showFilters, onFilter));
         }
     }
