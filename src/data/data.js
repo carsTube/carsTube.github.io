@@ -72,7 +72,10 @@ export async function getAds(page, query, own, order) {
     data.pages = Math.ceil(data.count / pageSize);
 
     return data;
+}
 
+export async function getRecentAds() {
+    return api.get(endPoints.recentAds);
 }
 
 

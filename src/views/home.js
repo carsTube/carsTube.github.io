@@ -1,4 +1,4 @@
-import { getAds } from '../data/data.js';
+import { getAds, getRecentAds } from '../data/data.js';
 import { html } from '../lib.js'
 import { adCard } from './catalog.js';
 
@@ -17,7 +17,7 @@ const homeTemplate = (recentAds) => html`
 
 
 export async function homePage(ctx) {
-    const recentAds = await getAds(0, 0, false, '-createdAt');
+    const recentAds = await getRecentAds();
     ctx.render(homeTemplate(recentAds.results));
 
     
