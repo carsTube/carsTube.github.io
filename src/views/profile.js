@@ -20,7 +20,7 @@ const profileTemplate = (ads, userData) => html`
 export async function profilePage(ctx) {
     const userData = getUserData();
     if (userData) {
-        const ads = await getAds(1, '', false, true);
+        const ads = await getAds(1, '', true, false);
         ctx.render(profileTemplate(ads.results, userData));
     } else {
         ctx.page.redirect('/login');
